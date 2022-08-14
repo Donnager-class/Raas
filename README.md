@@ -1,18 +1,19 @@
 # Raas
 
-## My previous configs:
+---
+## Manjaro 21.3.5
 
 ![](Resources/raas.png)
 
-| OS | Ubuntu 22.04 |
+| Stuff | Raased |
 |---------------------------|-------------------------|
 | Window Manager | awesomeWM |
 | Taskbar | Polybar |
-| Lockscreen | xscreensaver |
+| Lockscreen | i3 lock |
 | Window switch/launcher | Rofi |
 | Transition/Animations | Picom |
-
-## TO-DO
-
-* i3 locks - instead of xscreensaver
-* dmenu - instead of rofi
+| Shell | fish |
+| Terminal | kitty |
+| File Manager | Krusader |
+| Audio Manager | pulseaudio |
+| Network Manager | nm-applet |

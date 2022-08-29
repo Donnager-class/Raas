@@ -6,7 +6,7 @@
 ![](Resources/raas.png)
 
 ## Setup
-make sure ur in the right directory
+make sure ur in the right directory "~/"
 
 | Stuff | Raased |
 |---------------------------|-------------------------|

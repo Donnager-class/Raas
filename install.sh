@@ -18,22 +18,54 @@ HELPER="paru"
 echo "Lemme update this legacy stuff real-quick fr fr..." && sleep 2
 sudo pacman --noconfirm -Syu
 
-echo ",---,---,---,---,---,---,---,---,---,---,---,---,---,-------,
-|1/2| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | + | ' | <-    |
-|---'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-----|
-| ->| | Q | W | E | R | T | Y | U | I | O | P | ] | ^ |     |
-|-----',--',--',--',--',--',--',--',--',--',--',--',--'|    |
-| Caps | A | S | D | F | G | H | J | K | L | \ | [ | * |    |
-|----,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'---'----|
-|    | < | Z | X | C | V | B | N | M | , | . | - |          |
-|----'-,-',--'--,'---'---'---'---'---'---'-,-'---',--,------|
-| ctrl |  | alt |                          |altgr |  | ctrl |
-'------'  '-----'--------------------------'------'  '------'
-                       --No Cap, ima install some stuff rn...
+echo "--No Cap, ima install some stuff rn...
 " && sleep 2
 
 #Install dependancies if not installed
-sudo pacman -S --noconfirm --needed awesome picom polybar rofi ranger feh tmux i3lock kitty fish
+sudo pacman -S --noconfirm --needed awesome picom polybar rofi feh tmux i3lock make fish
+
+#Choices begin
+#AUR helper
+echo "Select an AUR helper 1) paru  2) yay"
+read -r -p "What is the AUR helper of your choice? (Default is paru): " num
+
+if [ $num -eq 2 ]
+then
+    HELPER="yay"
+fi
+
+if ! command -v $HELPER &> /dev/null
+then
+    echo "It seems that you don't have $HELPER installed, I'll install that for you before continuing."
+	git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
+	(cd ~/.srcs/$HELPER/ && makepkg -si )
+fi
+
+# #Shell   --Breaks vm's Just remove the dependancies from "fish" in order to uncomment this
+# echo "Type the shell of your choice, eg: fish, zsh, etc"
+# read -r -p "What is the shell of your choice? (default is bash): " shelly
+# sudo pacman -S $shelly
+# echo /usr/local/bin/$shelly | sudo tee -a /etc/shells
+# chsh -s /bin/$shelly
+
+#Terminal
+echo "Type the terminal of your choice, eg: kitty(preffered), terminator, etc"
+read -r -p "Note: You will have to edit rc.lua if you choose a terminal other than kitty?: " termi
+sudo pacman -S $termi
+
+#Editor
+echo "Type the editor of your choice, eg: neovim, emacs, etc"
+read -r -p "What is the editor of your choice? (Default is nano): " edity
+sudo pacman -S $edity
+
+#File Manager
+echo "Type the File Manager of your choice, eg: krusader, ranger, etc"
+read -r -p "What is the File Manager of your choice?: " fmany
+sudo pacman -S $fmany
+
+echo "Note: WM, DE and other options wil need other configs, therefore its not an option to change" && sleep 2
+
+#Choices end
 
 #Install the rice and everything nice 
 mkdir -p ~/.config/
@@ -45,7 +77,7 @@ mkdir -p ~/.config/
         echo "Installing rofi configs..."
         mkdir ~/.config/rofi && cp -r ~/Raas/Raased/rofi/* ~/.config/rofi;
     fi
-    sleep 5
+    sleep 3
     if [ -d ~/.config/picom ]; then
         echo "Picom configs detected, backing up..."
         mkdir ~/.config/picom.old && mv ~/.config/picom/* ~/.config/picom.old/
@@ -54,7 +86,7 @@ mkdir -p ~/.config/
         echo "Installing picom configs..."
         mkdir ~/.config/picom && cp -r ~/Raas/Raased/picom/* ~/.config/picom;
     fi
-    sleep 5
+    sleep 3
     if [ -d ~/.config/polybar ]; then
         echo "Polybar configs detected, backing up..."
         mkdir ~/.config/polybar.old && mv ~/.config/polybar/* ~/.config/polybar.old/
@@ -65,7 +97,7 @@ mkdir -p ~/.config/
         mkdir ~/.config/polybar && cp -r ~/Raas/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
     fi
-    sleep 5
+    sleep 3
     if [ -d ~/.config/awesome ]; then
         echo "awesome configs detected, backing up..."
         mkdir ~/.config/awesome.old && mv ~/.config/awesome/* ~/.config/awesome.old/
@@ -74,7 +106,7 @@ mkdir -p ~/.config/
         echo "Installing awesome configs..."
         mkdir ~/.config/awesome && cp -r ~/Raas/Raased/awesome/* ~/.config/awesome;
     fi
-    sleep 5 
+    sleep 3 
     if [ -d ~/Pictures ]; then
         echo "Moving images to ~/Pictures..."
         cp -r ~/Raas/Raased/Resources/* ~/Pictures;
@@ -82,10 +114,7 @@ mkdir -p ~/.config/
         echo "Creating a Pictures folder in ~/..."
         mkdir ~/Pictures && cp -r ~/Raas/Raased/Resources/* ~/Pictures;
     fi
-    sleep 5 
-
-
-
+    sleep 3 
     if [ -d ~/bin ]; then
         echo "~/bin detected, backing up..."
         mkdir ~/bin.old && mv ~/bin/* ~/bin.old/
@@ -116,18 +145,16 @@ mkdir -p ~/.config/
                 ;;
 
             fish)
-                echo "I see you use fish. shahab96 likes your choice."
+                echo "I rate the fit"
                 fish -c fish_add_path -P $HOME/bin
                 ;;
 
             *)
                 echo "Please add: export PATH='\$PATH:$HOME/bin' to your .bashrc or whatever shell you use."
-                echo "If you know how to add stuff to shells other than bash, zsh and fish please help out here!"
         esac
     fi
-    
 
-# done 
+#Done Bozo 
 echo "           __________                                 
          .'----------'.                              
          | .--------. |                             
@@ -142,3 +169,13 @@ echo "           __________
 +-----------------------------------------------------+
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "
 sleep 5
+
+#Remove bloat lol
+while true; do
+    read -p "Do you want to remove this rice bloat? (y/n)" yn
+    case $yn in
+        [Yy]* ) rm -rf ~/Raas; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done

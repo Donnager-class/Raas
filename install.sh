@@ -14,7 +14,7 @@ __________
 #Default vars
 HELPER="paru"
 
-# does full system update
+#System update
 echo "Lemme update this legacy stuff real-quick fr fr..." && sleep 2
 sudo pacman --noconfirm -Syu
 
@@ -32,54 +32,68 @@ echo ",---,---,---,---,---,---,---,---,---,---,---,---,---,-------,
                        --No Cap, ima install some stuff rn...
 " && sleep 2
 
-# install dependancies if not installed
+#Install dependancies if not installed
 sudo pacman -S --noconfirm --needed awesome picom polybar rofi ranger feh tmux i3lock kitty fish
 
-#install custom picom config file 
+#Install the rice and everything nice 
 mkdir -p ~/.config/
-
     if [ -d ~/.config/rofi ]; then
         echo "Rofi configs detected, backing up..."
         mkdir ~/.config/rofi.old && mv ~/.config/rofi/* ~/.config/rofi.old/
-        cp -r ./config/rofi/* ~/.config/rofi;
+        cp -r ~/Raas/Raased/rofi/* ~/.config/rofi;
     else
         echo "Installing rofi configs..."
-        mkdir ~/.config/rofi && cp -r ./config/rofi/* ~/.config/rofi;
+        mkdir ~/.config/rofi && cp -r ~/Raas/Raased/rofi/* ~/.config/rofi;
     fi
     sleep 5
-
-    if [ -f ~/.config/picom.conf ]; then
+    if [ -d ~/.config/picom ]; then
         echo "Picom configs detected, backing up..."
-        cp ~/.config/picom.conf ~/.config/picom.conf.old;
-        cp ./config/picom.conf ~/.config/picom.conf;
+        mkdir ~/.config/picom.old && mv ~/.config/picom/* ~/.config/picom.old/
+        cp -r ~/Raas/Raased/picom/* ~/.config/picom;
     else
         echo "Installing picom configs..."
-         cp ./config/picom.conf ~/.config/picom.conf;
+        mkdir ~/.config/picom && cp -r ~/Raas/Raased/picom/* ~/.config/picom;
     fi
-
-    if [ -d ~/wallpapers ]; then
-        echo "Adding wallpaper to ~/wallpapers..."
-        cp ./wallpapers/yosemite-lowpoly.jpg ~/wallpapers/;
+    sleep 5
+    if [ -d ~/.config/polybar ]; then
+        echo "Polybar configs detected, backing up..."
+        mkdir ~/.config/polybar.old && mv ~/.config/polybar/* ~/.config/polybar.old/
+        cp -r ~/Raas/Raased/polybar/* ~/.config/polybar;
+        chmod +x ~/.config/polybar/launch.sh
     else
-        echo "Installing wallpaper..."
-        mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
-
-    if [ -d ~/.awesome ]; then
-        echo "awesomewm configs detected, backing up..."
-        mkdir ~/.awesome.old && mv ~/.awesome/* ~/.awesome.old/
-        cp -r ./awesome/* ~/.awesome/;
-    else
-        echo "Installing awesomewm configs..."
-        mkdir ~/.awesome && cp -r ./awesome/* ~/.awesome;
+        echo "Installing polybar configs..."
+        mkdir ~/.config/polybar && cp -r ~/Raas/Raased/polybar/* ~/.config/polybar;
+        chmod +x ~/.config/polybar/launch.sh
     fi
+    sleep 5
+    if [ -d ~/.config/awesome ]; then
+        echo "awesome configs detected, backing up..."
+        mkdir ~/.config/awesome.old && mv ~/.config/awesome/* ~/.config/awesome.old/
+        cp -r ~/Raas/Raased/awesome/* ~/.config/awesome;
+    else
+        echo "Installing awesome configs..."
+        mkdir ~/.config/awesome && cp -r ~/Raas/Raased/awesome/* ~/.config/awesome;
+    fi
+    sleep 5 
+    if [ -d ~/Pictures ]; then
+        echo "Moving images to ~/Pictures..."
+        cp -r ~/Raas/Raased/Resources/* ~/Pictures;
+    else
+        echo "Creating a Pictures folder in ~/..."
+        mkdir ~/Pictures && cp -r ~/Raas/Raased/Resources/* ~/Pictures;
+    fi
+    sleep 5 
+
+
+
     if [ -d ~/bin ]; then
         echo "~/bin detected, backing up..."
         mkdir ~/bin.old && mv ~/bin/* ~/bin.old/
-        cp -r ./bin/* ~/bin;
+        cp -r ~/Raas/Raased/bin/* ~/bin;
 	clear
     else
         echo "Installing bin scripts..."
-        mkdir ~/bin && cp -r ./bin/* ~/bin/;
+        mkdir ~/bin && cp -r ~/Raas/Raased/bin/* ~/bin/;
 	clear
         SHELLNAME=$(echo $SHELL | grep -o '[^/]*$')
         case $SHELLNAME in

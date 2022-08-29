@@ -5,13 +5,16 @@
 
 ![](Resources/raas.png)
 
+## Setup
+make sure ur in the right directory
+
 | Stuff | Raased |
 |---------------------------|-------------------------|
 | Window Manager | awesomeWM |
 | Taskbar | Polybar |
+| Compositor  | Picom |
 | Lockscreen | i3 lock |
 | Window switch/launcher | Rofi |
-| Transition/Animations | Picom |
 | Shell | fish |
 | Terminal | kitty |
 | File Manager | Krusader |

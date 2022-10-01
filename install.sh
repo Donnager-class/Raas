@@ -72,57 +72,57 @@ mkdir -p ~/.config/
     if [ -d ~/.config/rofi ]; then
         echo "Rofi configs detected, backing up..."
         mkdir ~/.config/rofi.old && mv ~/.config/rofi/* ~/.config/rofi.old/
-        cp -r ~/Raas/Raased/rofi/* ~/.config/rofi;
+        cp -r ~/dotfiles/Raased/rofi/* ~/.config/rofi;
     else
         echo "Installing rofi configs..."
-        mkdir ~/.config/rofi && cp -r ~/Raas/Raased/rofi/* ~/.config/rofi;
+        mkdir ~/.config/rofi && cp -r ~/dotfiles/Raased/rofi/* ~/.config/rofi;
     fi
     sleep 3
     if [ -d ~/.config/picom ]; then
         echo "Picom configs detected, backing up..."
         mkdir ~/.config/picom.old && mv ~/.config/picom/* ~/.config/picom.old/
-        cp -r ~/Raas/Raased/picom/* ~/.config/picom;
+        cp -r ~/dotfiles/Raased/picom/* ~/.config/picom;
     else
         echo "Installing picom configs..."
-        mkdir ~/.config/picom && cp -r ~/Raas/Raased/picom/* ~/.config/picom;
+        mkdir ~/.config/picom && cp -r ~/dotfiles/Raased/picom/* ~/.config/picom;
     fi
     sleep 3
     if [ -d ~/.config/polybar ]; then
         echo "Polybar configs detected, backing up..."
         mkdir ~/.config/polybar.old && mv ~/.config/polybar/* ~/.config/polybar.old/
-        cp -r ~/Raas/Raased/polybar/* ~/.config/polybar;
+        cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
     else
         echo "Installing polybar configs..."
-        mkdir ~/.config/polybar && cp -r ~/Raas/Raased/polybar/* ~/.config/polybar;
+        mkdir ~/.config/polybar && cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
     fi
     sleep 3
     if [ -d ~/.config/awesome ]; then
         echo "awesome configs detected, backing up..."
         mkdir ~/.config/awesome.old && mv ~/.config/awesome/* ~/.config/awesome.old/
-        cp -r ~/Raas/Raased/awesome/* ~/.config/awesome;
+        cp -r ~/dotfiles/Raased/awesome/* ~/.config/awesome;
     else
         echo "Installing awesome configs..."
-        mkdir ~/.config/awesome && cp -r ~/Raas/Raased/awesome/* ~/.config/awesome;
+        mkdir ~/.config/awesome && cp -r ~/dotfiles/Raased/awesome/* ~/.config/awesome;
     fi
     sleep 3 
     if [ -d ~/Pictures ]; then
         echo "Moving images to ~/Pictures..."
-        cp -r ~/Raas/Raased/Resources/* ~/Pictures;
+        cp -r ~/dotfiles/Raased/Resources/* ~/Pictures;
     else
         echo "Creating a Pictures folder in ~/..."
-        mkdir ~/Pictures && cp -r ~/Raas/Raased/Resources/* ~/Pictures;
+        mkdir ~/Pictures && cp -r ~/dotfiles/Raased/Resources/* ~/Pictures;
     fi
     sleep 3 
     if [ -d ~/bin ]; then
         echo "~/bin detected, backing up..."
         mkdir ~/bin.old && mv ~/bin/* ~/bin.old/
-        cp -r ~/Raas/Raased/bin/* ~/bin;
+        cp -r ~/dotfiles/Raased/bin/* ~/bin;
 	clear
     else
         echo "Installing bin scripts..."
-        mkdir ~/bin && cp -r ~/Raas/Raased/bin/* ~/bin/;
+        mkdir ~/bin && cp -r ~/dotfiles/Raased/bin/* ~/bin/;
 	clear
         SHELLNAME=$(echo $SHELL | grep -o '[^/]*$')
         case $SHELLNAME in
@@ -174,7 +174,7 @@ sleep 5
 while true; do
     read -p "Do you want to remove this rice bloat? (y/n)" yn
     case $yn in
-        [Yy]* ) rm -rf ~/Raas; break;;
+        [Yy]* ) rm -rf ~/dotfiles; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac

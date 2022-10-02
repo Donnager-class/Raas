@@ -440,8 +440,12 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 --Custom Configs
+--Commands that I forget:
+--Super+Right Mouse BTN = Resize (Tile & Float)
+--Super+Left Mouse BTN = Move (Tile & Float)
+--CTRL+SUPER+SPACE = Tile to Float and Float to Tile
 awful.spawn.with_shell("feh --bg-scale ~/Pictures/2.jpg")
-awful.spawn.with_shell("~/.config/polybar/launch.sh")
+awful.spawn.with_shell("~/.config/polybar/launch.sh --material")
 awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
 awful.spawn.with_shell("nm-applet")
 beautiful.useless_gap=10

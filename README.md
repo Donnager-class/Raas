@@ -3,7 +3,7 @@
 ---
 ## Manjaro 21.3.5
 
-![](Resources/raas.png)
+![](Resources/raas1.png)
 
 ## Setup
 make sure ur in the right directory "~/"
@@ -20,3 +20,9 @@ make sure ur in the right directory "~/"
 | File Manager | Krusader |
 | Audio Manager | pulseaudio |
 | Network Manager | nm-applet |
+
+OLD^^^ still need to make some features my own such as polybar only being a reference
+
+WIP below:
+
+![](Resources/raas1.1.png)

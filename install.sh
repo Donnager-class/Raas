@@ -22,7 +22,7 @@ echo "--No Cap, ima install some stuff rn...
 " && sleep 2
 
 #Install dependancies if not installed
-sudo pacman -S --noconfirm --needed awesome picom polybar rofi feh tmux i3lock make fish
+sudo pacman -S --noconfirm --needed awesome picom polybar rofi feh i3lock make neovim ctags
 
 #Choices begin
 #AUR helper

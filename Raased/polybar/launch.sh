@@ -1,32 +1,14 @@
 #!/usr/bin/env bash
 
-dir="$HOME/.config/polybar"
-themes=(`ls --hide="launch.sh" $dir`)
+# Add this script to your wm startup file.
 
-launch_bar() {
-	# Terminate already running bar instances
-	killall -q polybar
+DIR="$HOME/.config/polybar/material"
 
-	# Wait until the processes have been shut down
-	while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+# Terminate already running bar instances
+killall -q polybar
 
-	# Launch the bar
-	if [[ "$style" == "hack" || "$style" == "cuts" ]]; then
-		polybar -q top -c "$dir/$style/config.ini" &
-		polybar -q bottom -c "$dir/$style/config.ini" &
-	elif [[ "$style" == "pwidgets" ]]; then
-		bash "$dir"/pwidgets/launch.sh --main
-	else
-		polybar -q main -c "$dir/$style/config.ini" &	
-	fi
-}
+# Wait until the processes have been shut down
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-if [[ "$1" == "--material" ]]; then
-	style="material"
-	launch_bar
-
-else
-	cat <<- EOF
-	see : https://github.com/adi1090x/polybar-themes
-	EOF
-fi
+# Launch the bar
+polybar -q main -c "$DIR"/config.ini &

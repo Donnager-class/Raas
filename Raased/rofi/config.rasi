@@ -9,14 +9,14 @@ configuration {
     darkred:                        #f16269;
     green  :                        #78B892;
     darkgreen:                      #8cd7aa;
-    yellow:                         #DE8F78;
+    yellow:                         #FFDD05;
     darkyellow:                     #e9967e;
     blue:                           #6791C9;
     darkblue:                       #79aaeb;
     purple:                         #BC83E3;
     darkpurple:                     #c488ec;
-    cyan:                           #67AFC1;
-    darkcyan:                       #7acfe4;
+    orange:                           #FE5A1D;
+    darkorange:                       #FE5A1D;
     foreground:                     #D9D7D6;
     background:                     #000000;
     border:                         #434C5E;
@@ -66,7 +66,7 @@ element normal.urgent {
     text-color:       @background;
 }
 element normal.active {
-    background-color: @green;
+    background-color: @yellow;
     text-color:       @background;
 }
 element selected.normal {
@@ -79,7 +79,7 @@ element selected.urgent {
     text-color:       @background;
 }
 element selected.active {
-    background-color: @yellow;
+    background-color: @green;
     text-color:       @background;
 }
 element alternate.normal {

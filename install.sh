@@ -22,7 +22,7 @@ echo "--No Cap, ima install some stuff rn...
 " && sleep 1
 
 #Install dependancies if not installed
-sudo pacman -S --noconfirm --needed awesome picom polybar rofi feh i3lock make neovim ctags
+sudo pacman -S --noconfirm --needed awesome picom polybar rofi feh i3lock make neovim
 
 #Choices begin
 #AUR helper
@@ -78,6 +78,15 @@ mkdir -p ~/.config/
         mkdir ~/.config/rofi && cp -r ~/dotfiles/Raased/rofi/* ~/.config/rofi;
     fi
     sleep 1
+    if [ -d ~/.config/nvim ]; then
+        echo "Neovim configs detected, backing up..."
+        mkdir ~/.config/nvim.old && mv ~/.config/nvim/* ~/.config/nvim.old/
+        cp -r ~/dotfiles/Raased/nvim/* ~/.config/nvim;
+    else
+        echo "Installing neovim configs..."
+        mkdir ~/.config/nvim && cp -r ~/dotfiles/Raased/nvim/* ~/.config/nvim;
+    fi
+    sleep 1
     if [ -d ~/.config/picom ]; then
         echo "Picom configs detected, backing up..."
         mkdir ~/.config/picom.old && mv ~/.config/picom/* ~/.config/picom.old/
@@ -92,10 +101,16 @@ mkdir -p ~/.config/
         mkdir ~/.config/polybar.old && mv ~/.config/polybar/* ~/.config/polybar.old/
         cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
+        chmod +x ~/.config/polybar/material/scripts/launcher.sh
+        chmod +x ~/.config/polybar/material/scripts/powermenu.sh
+        chmod +x ~/.config/polybar/material/scripts/updates.sh
     else
         echo "Installing polybar configs..."
         mkdir ~/.config/polybar && cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
+        chmod +x ~/.config/polybar/material/scripts/launcher.sh
+        chmod +x ~/.config/polybar/material/scripts/powermenu.sh
+        chmod +x ~/.config/polybar/material/scripts/updates.sh
     fi
     sleep 1
     if [ -d ~/.config/awesome ]; then
@@ -170,11 +185,11 @@ echo "           __________
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "
 sleep 5
 
-#Remove bloat lol
+#addons.sh
 while true; do
-    read -p "Do you want to remove this rice bloat? (y/n)" yn
+    read -p "Install dependencies for feature? (y/n)" yn
     case $yn in
-        [Yy]* ) rm -rf ~/dotfiles; break;;
+        [Yy]* ) chmod +x addons.sh && ./addons.sh; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac

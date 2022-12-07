@@ -9,17 +9,17 @@ __________
  |____|_  /(____  (____  /____  >
         \/      \/     \/     \/ 
                  --Adriano's Raas
-" && sleep 2
+" && sleep 1
 
 #Default vars
 HELPER="paru"
 
 #System update
-echo "Lemme update this legacy stuff real-quick fr fr..." && sleep 2
+echo "Lemme update this legacy stuff real-quick fr fr..." && sleep 1
 sudo pacman --noconfirm -Syu
 
 echo "--No Cap, ima install some stuff rn...
-" && sleep 2
+" && sleep 1
 
 #Install dependancies if not installed
 sudo pacman -S --noconfirm --needed awesome picom polybar rofi feh i3lock make neovim ctags
@@ -63,7 +63,7 @@ echo "Type the File Manager of your choice, eg: krusader, ranger, etc"
 read -r -p "What is the File Manager of your choice?: " fmany
 sudo pacman -S $fmany
 
-echo "Note: WM, DE and other options wil need other configs, therefore its not an option to change" && sleep 2
+echo "Note: WM, DE and other options wil need other configs, therefore its not an option to change" && sleep 1
 
 #Choices end
 
@@ -77,7 +77,7 @@ mkdir -p ~/.config/
         echo "Installing rofi configs..."
         mkdir ~/.config/rofi && cp -r ~/dotfiles/Raased/rofi/* ~/.config/rofi;
     fi
-    sleep 3
+    sleep 1
     if [ -d ~/.config/picom ]; then
         echo "Picom configs detected, backing up..."
         mkdir ~/.config/picom.old && mv ~/.config/picom/* ~/.config/picom.old/
@@ -86,7 +86,7 @@ mkdir -p ~/.config/
         echo "Installing picom configs..."
         mkdir ~/.config/picom && cp -r ~/dotfiles/Raased/picom/* ~/.config/picom;
     fi
-    sleep 3
+    sleep 1
     if [ -d ~/.config/polybar ]; then
         echo "Polybar configs detected, backing up..."
         mkdir ~/.config/polybar.old && mv ~/.config/polybar/* ~/.config/polybar.old/
@@ -97,7 +97,7 @@ mkdir -p ~/.config/
         mkdir ~/.config/polybar && cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
     fi
-    sleep 3
+    sleep 1
     if [ -d ~/.config/awesome ]; then
         echo "awesome configs detected, backing up..."
         mkdir ~/.config/awesome.old && mv ~/.config/awesome/* ~/.config/awesome.old/
@@ -106,7 +106,7 @@ mkdir -p ~/.config/
         echo "Installing awesome configs..."
         mkdir ~/.config/awesome && cp -r ~/dotfiles/Raased/awesome/* ~/.config/awesome;
     fi
-    sleep 3 
+    sleep 1
     if [ -d ~/Pictures ]; then
         echo "Moving images to ~/Pictures..."
         cp -r ~/dotfiles/Raased/Resources/* ~/Pictures;
@@ -114,7 +114,7 @@ mkdir -p ~/.config/
         echo "Creating a Pictures folder in ~/..."
         mkdir ~/Pictures && cp -r ~/dotfiles/Raased/Resources/* ~/Pictures;
     fi
-    sleep 3 
+    sleep 1
     if [ -d ~/bin ]; then
         echo "~/bin detected, backing up..."
         mkdir ~/bin.old && mv ~/bin/* ~/bin.old/

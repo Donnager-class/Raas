@@ -65,6 +65,13 @@ sudo pacman -S $fmany
 
 echo "Note: WM, DE and other options wil need other configs, therefore its not an option to change" && sleep 1
 
+#Neovim dependencies
+sudo pacman -S ctags git curl && sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+#Polybar dependencies
+sudo pacman -S ttc-iosevka ttf-icomoon-icons
+
 #Choices end
 
 #Install the rice and everything nice 
@@ -90,27 +97,20 @@ mkdir -p ~/.config/
     if [ -d ~/.config/picom ]; then
         echo "Picom configs detected, backing up..."
         mkdir ~/.config/picom.old && mv ~/.config/picom/* ~/.config/picom.old/
-        cp -r ~/dotfiles/Raased/picom/* ~/.config/picom;
+        cp -r ~~/dotfiles/Raased/picom/* ~/.config/picom;
     else
         echo "Installing picom configs..."
         mkdir ~/.config/picom && cp -r ~/dotfiles/Raased/picom/* ~/.config/picom;
     fi
-    sleep 1
-    if [ -d ~/.config/polybar ]; then
+if [ -d ~/.config/polybar ]; then
         echo "Polybar configs detected, backing up..."
         mkdir ~/.config/polybar.old && mv ~/.config/polybar/* ~/.config/polybar.old/
         cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
-        chmod +x ~/.config/polybar/material/scripts/launcher.sh
-        chmod +x ~/.config/polybar/material/scripts/powermenu.sh
-        chmod +x ~/.config/polybar/material/scripts/updates.sh
     else
         echo "Installing polybar configs..."
         mkdir ~/.config/polybar && cp -r ~/dotfiles/Raased/polybar/* ~/.config/polybar;
         chmod +x ~/.config/polybar/launch.sh
-        chmod +x ~/.config/polybar/material/scripts/launcher.sh
-        chmod +x ~/.config/polybar/material/scripts/powermenu.sh
-        chmod +x ~/.config/polybar/material/scripts/updates.sh
     fi
     sleep 1
     if [ -d ~/.config/awesome ]; then
@@ -129,45 +129,6 @@ mkdir -p ~/.config/
         echo "Creating a Pictures folder in ~/..."
         mkdir ~/Pictures && cp -r ~/dotfiles/Raased/Resources/* ~/Pictures;
     fi
-    sleep 1
-    if [ -d ~/bin ]; then
-        echo "~/bin detected, backing up..."
-        mkdir ~/bin.old && mv ~/bin/* ~/bin.old/
-        cp -r ~/dotfiles/Raased/bin/* ~/bin;
-	clear
-    else
-        echo "Installing bin scripts..."
-        mkdir ~/bin && cp -r ~/dotfiles/Raased/bin/* ~/bin/;
-	clear
-        SHELLNAME=$(echo $SHELL | grep -o '[^/]*$')
-        case $SHELLNAME in
-            bash)
-                if [[ ":$PATH:" == *":$HOME/bin:"* ]]; then
-                    echo "Looks like $HOME/bin is not on your PATH, adding it now."
-                    echo "export PATH=\$PATH:\$HOME/bin" >> $HOME/.bashrc
-                else
-                    echo "$HOME/bin is already in your PATH. Proceeding."
-                fi
-                ;;
-
-            zsh)
-                if [[ ":$PATH:" == *":$HOME/bin:"* ]]; then
-                    echo "Looks like $HOME/bin is not on your PATH, adding it now."
-                    echo "export PATH=\$PATH:\$HOME/bin" >> $HOME/.zshrc
-                else
-                    echo "$HOME/bin is already in your PATH. Proceeding."
-                fi
-                ;;
-
-            fish)
-                echo "I rate the fit"
-                fish -c fish_add_path -P $HOME/bin
-                ;;
-
-            *)
-                echo "Please add: export PATH='\$PATH:$HOME/bin' to your .bashrc or whatever shell you use."
-        esac
-    fi
 
 #Done Bozo 
 echo "           __________                                 
@@ -185,11 +146,11 @@ echo "           __________
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "
 sleep 5
 
-#addons.sh
+#Remove bloat lol
 while true; do
-    read -p "Install dependencies for feature? (y/n)" yn
+    read -p "Do you want to remove this rice bloat? (y/n)" yn
     case $yn in
-        [Yy]* ) chmod +x addons.sh && ./addons.sh; break;;
+        [Yy]* ) rm -rf ~/Raas; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac

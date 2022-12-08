@@ -1,4 +1,4 @@
-set number
+:set number
 :set relativenumber
 :set autoindent
 :set tabstop=4
@@ -15,6 +15,7 @@ Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'https://github.com/vim-airline/vim-airline' " Status bar
 Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
 Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Retro Scheme
+"Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
 Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
 Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
@@ -35,48 +36,33 @@ nmap <F8> :TagbarToggle<CR>
 
 :set completeopt-=preview " For No Previews
 
-:colorscheme darkblue
+:colorscheme happy_hacking
 
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 
-" Move to previous/next
-nnoremap <silent>    <A-,> <Cmd>BufferPrevious<CR>
-nnoremap <silent>    <A-.> <Cmd>BufferNext<CR>
-" Re-order to previous/next
-nnoremap <silent>    <A-<> <Cmd>BufferMovePrevious<CR>
-nnoremap <silent>    <A->> <Cmd>BufferMoveNext<CR>
-" Goto buffer in position...
-nnoremap <silent>    <A-1> <Cmd>BufferGoto 1<CR>
-nnoremap <silent>    <A-2> <Cmd>BufferGoto 2<CR>
-nnoremap <silent>    <A-3> <Cmd>BufferGoto 3<CR>
-nnoremap <silent>    <A-4> <Cmd>BufferGoto 4<CR>
-nnoremap <silent>    <A-5> <Cmd>BufferGoto 5<CR>
-nnoremap <silent>    <A-6> <Cmd>BufferGoto 6<CR>
-nnoremap <silent>    <A-7> <Cmd>BufferGoto 7<CR>
-nnoremap <silent>    <A-8> <Cmd>BufferGoto 8<CR>
-nnoremap <silent>    <A-9> <Cmd>BufferGoto 9<CR>
-nnoremap <silent>    <A-0> <Cmd>BufferLast<CR>
-" Pin/unpin buffer
-nnoremap <silent>    <A-p> <Cmd>BufferPin<CR>
-" Close buffer
-nnoremap <silent>    <A-c> <Cmd>BufferClose<CR>
-" Wipeout buffer
-"                          :BufferWipeout
-" Close commands
-"                          :BufferCloseAllButCurrent
-"                          :BufferCloseAllButPinned
-"                          :BufferCloseAllButCurrentOrPinned
-"                          :BufferCloseBuffersLeft
-"                          :BufferCloseBuffersRight
-" Magic buffer-picking mode
-nnoremap <silent> <C-p>    <Cmd>BufferPick<CR>
-" Sort automatically by...
-nnoremap <silent> <Space>bb <Cmd>BufferOrderByBufferNumber<CR>
-nnoremap <silent> <Space>bd <Cmd>BufferOrderByDirectory<CR>
-nnoremap <silent> <Space>bl <Cmd>BufferOrderByLanguage<CR>
-nnoremap <silent> <Space>bw <Cmd>BufferOrderByWindowNumber<CR>
+" --- Just Some Notes ---
+" :PlugClean :PlugInstall :UpdateRemotePlugins
+"
+" :CocInstall coc-python
+" :CocInstall coc-clangd
+" :CocInstall coc-snippets
+" :CocCommand snippets.edit... FOR EACH FILE TYPE
 
-" Other:
-" :BarbarEnable - enables barbar (enabled by default)
-" :BarbarDisable - very bad command, should never be used
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"

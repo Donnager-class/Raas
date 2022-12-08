@@ -60,6 +60,7 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
+--	awful.layout.suit.floating
 }
 -- }}}
 
@@ -124,7 +125,7 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey, 	  }, "r", function () awful.spawn.with_shell("rofi -show drun") end),
     awful.key({ modkey,		  }, "Tab", function () awful.spawn.with_shell("rofi -show") end),
-    awful.key({ modkey,		  }, ";", function () awful.spawn.with_shell("i3lock -i ~/Pictures/1.png") end),
+    awful.key({ modkey,		  }, ";", function () awful.spawn.with_shell("i3lock -i ~/Pictures/misc/1.png") end),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -440,11 +441,7 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 --Custom Configs
---Commands that I forget:
---Super+Right Mouse BTN = Resize (Tile & Float)
---Super+Left Mouse BTN = Move (Tile & Float)
---CTRL+SUPER+SPACE = Tile to Float and Float to Tile
-awful.spawn.with_shell("feh --bg-scale ~/Pictures/2.jpg")
+awful.spawn.with_shell("feh --bg-scale ~/Pictures/misc/2.jpg")
 awful.spawn.with_shell("~/.config/polybar/launch.sh")
 awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
 awful.spawn.with_shell("nm-applet")

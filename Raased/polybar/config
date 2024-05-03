@@ -1,16 +1,16 @@
 [colors]
-background = #282A2E
-background-alt = #373B41
-foreground = #C5C8C6
-primary = #F0C674
+background = #00
+background-alt = #E81AC0
+foreground = #FFFFFF
+primary = #FFA533
 secondary = #8ABEB7
-alert = #A54242
-disabled = #707880
+alert = #E50606
+disabled = #494A73
 
 [bar/sam]
 width = 100%
 height = 20pt
-radius = 6
+radius = 4
 
 ; dpi = 96
 
@@ -19,7 +19,7 @@ foreground = ${colors.foreground}
 
 line-size = 3pt
 
-border-size = 4pt
+border-size = 2pt
 border-color = #00000000
 
 padding-left = 0
@@ -33,8 +33,8 @@ separator-foreground = ${colors.disabled}
 font-0 = monospace;2
 
 modules-left = xworkspaces xwindow 
-modules-center = date
-modules-right = memory cpu wlan
+modules-center = date popup-calendar
+modules-right = volume-bar memory cpu wlan battery
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -143,9 +143,7 @@ type = internal/date
 interval = 1
 
 date = %a,%b %d
-
 time = %l:%M%p
-
 label = %date% %time%
 label-foreground = ${colors.primary}
 
@@ -153,4 +151,66 @@ label-foreground = ${colors.primary}
 screenchange-reload = true
 pseudo-transparency = true
 
+[module/battery]
+
+type = internal/battery
+low-at = 5
+full-at = 100
+
+battery = BAT0
+
+adapter = AC
+
+poll-interval = 5
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <label-discharging>
+format-full = <label-full>
+format-low = <label-low> <animation-low>
+
+label-charging = Charging - %percentage%%
+label-discharging = %percentage%%
+label-full = Full - %percentage%%
+label-low = Low - %percentage%%
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+animation-low-0 = !
+animation-low-1 =
+animation-low-framerate = 200
+
+[module/popup-calendar]
+type = custom/script
+exec = ~/.config/polybar/calendar.sh
+interval = 5
+click-left =  ~/.config/polybar/calendar.sh --popup &
+
+[module/volume-bar]
+type = internal/volume
+bar-volume-font = 2
+bar-volume-width = 10
+format-volume = <label-volume><bar-volume>
+label-volume = "󰕾 "
+label-muted = "󰖁 "
+label-volume-foreground = #B6C2E7
+format-muted-foreground = #FF0000
+bar-volume-foreground-0 = #92A3F7
+bar-volume-foreground-1 = #92A3F7
+bar-volume-foreground-2 = #6BB3E7
+bar-volume-foreground-3 = #6BB3E7
+bar-volume-foreground-4 = #6BB3E7
+bar-volume-foreground-5 = #6BE7D8
+bar-volume-foreground-6 = #6BE7D8
+bar-volume-gradient = true
+bar-volume-indicator = 
+bar-volume-fill = =
+bar-volume-empty = =
+bar-volume-empty-foreground = #666666
+
 ; vim:ft=dosini
+

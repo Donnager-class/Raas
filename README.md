@@ -1,28 +1,27 @@
 # Raas
 
 ---
-## Manjaro 21.3.5
+## Manjaro
 
 ![](Resources/raas1.png)
 
-## Setup
-make sure ur in the right directory "~/"
+![](Resources/raas1.1.png)
+
+![](Resources/raas1.1.png)
+
+## Some Stuff
 
 | Stuff | Raased |
 |---------------------------|-------------------------|
-| Window Manager | awesomeWM |
-| Taskbar | Polybar |
+| Window Manager | awesomewm |
+| Display Manager| ly-dm |
+| Bar | Polybar |
 | Compositor  | Picom |
 | Lockscreen | i3 lock |
-| Window switch/launcher | Rofi |
+| Window Switch | Rofi |
 | Shell | fish |
 | Terminal | kitty |
 | File Manager | Krusader |
 | Audio Manager | pulseaudio |
 | Network Manager | nm-applet |
 
-OLD^^^ still need to make some features my own such as polybar only being a reference
-
-WIP below:
-
-![](Resources/raas1.1.png)

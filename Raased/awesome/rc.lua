@@ -11,6 +11,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local xrandr = require("xrandr")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -109,6 +110,18 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "I", "II", "III", "IV", "V" }, s, awful.layout.layouts[1])
+	-- Test MutiMON
+	 -- Create a promptbox for each screen
+    s.mypromptbox = awful.widget.prompt()
+    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(gears.table.join(
+                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
+                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
+                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
+                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+	-- Test End
 
 end)
 -- }}}
@@ -125,7 +138,7 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey, 	  }, "r", function () awful.spawn.with_shell("rofi -show drun") end),
     awful.key({ modkey,		  }, "Tab", function () awful.spawn.with_shell("rofi -show") end),
-    awful.key({ modkey,		  }, ";", function () awful.spawn.with_shell("i3lock -i ~/Pictures/misc/1.png") end),
+    awful.key({ modkey,		  }, ";", function () awful.spawn.with_shell("i3lock -t -i ~/Pictures/misc/1.png") end),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -134,7 +147,7 @@ globalkeys = gears.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-
+	--awful.key({ modkey,           }, "1", function() xrandr.xrandr() end), DualMonitor
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -332,7 +345,9 @@ root.keys(globalkeys)
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
+	-- Added rule to not add colour border to polybar and other
     { rule = { },
+	  except_any = { class = { "Polybar" }},
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
@@ -441,11 +456,11 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 --Custom Configs
-awful.spawn.with_shell("feh --bg-scale ~/Pictures/misc/2.jpg")
+awful.spawn.with_shell("feh --bg-scale ~/Pictures/misc/ne.jpg")
 awful.spawn.with_shell("~/.config/polybar/launch.sh")
 awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
 awful.spawn.with_shell("nm-applet")
-beautiful.useless_gap=10
+beautiful.useless_gap=0
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
